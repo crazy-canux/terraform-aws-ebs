@@ -24,7 +24,7 @@ variable "csi_service_account" {
 variable "csi_chart_repo_url" {
   description = "URL to repository containing the EBS CSI helm chart"
   type        = string
-  default     = "https://kubernetes-sigs.github.io/aws-efs-csi-driver/"
+  default     = "https://kubernetes-sigs.github.io/aws-ebs-csi-driver/"
 }
 
 variable "csi_chart_version" {
