@@ -12,16 +12,19 @@ variable "oidc_issuer" {
 variable "csi_namespace" {
   description = "EBS CSI namespace"
   type        = string
+  default     = "kube-system"
 }
 
 variable "csi_service_account" {
   description = "Service account to be created for use with the CSI driver"
   type        = string
+  default     = "ebs-csi-controller-sa"
 }
 
 variable "csi_chart_repo_url" {
   description = "URL to repository containing the EBS CSI helm chart"
   type        = string
+  default     = "https://kubernetes-sigs.github.io/aws-efs-csi-driver/"
 }
 
 variable "csi_chart_version" {
