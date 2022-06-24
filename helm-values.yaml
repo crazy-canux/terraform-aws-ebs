@@ -1,0 +1,37 @@
+image:
+  repository: "public.ecr.aws/ebs-csi-driver/aws-ebs-csi-driver"
+  tag: "v1.7.0"
+
+controller:
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: app.kubernetes.io/instance
+              operator: In
+              values:
+              - ebs-csi-controller
+          topologyKey: topology.kubernetes.io/zone
+  env:
+    - name: AWS_STS_REGIONAL_ENDPOINTS
+      value: regional
+
+node:
+  tolerateAllTaints: true
+
+storageClasses:
+    - name: ebs-default
+      annotations:
+        storageclass.kubernetes.io/is-default-class: "true"
+      parameters:
+        type: gp3
+        encrypted: "false"
+        fsType: ext4
+      volumeBindingMode: WaitForFirstConsumer
+      allowVolumeExpansion: true
+      reclaimPolicy: Delete
+
+
