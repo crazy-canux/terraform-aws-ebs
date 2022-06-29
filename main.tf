@@ -77,6 +77,12 @@ resource "helm_release" "ebs-csi" {
     }
   }
 
+  # TODO: support multi storage class.
+  set {
+    name  = "storageClasses[0].name"
+    value = var.storage_class
+  }
+
   # Set ebs-csi service account name and IAM role annotaion
   set {
     name  = "controller.serviceAccount.name"
@@ -92,7 +98,7 @@ resource "helm_release" "ebs-csi" {
 resource "null_resource" "delete_default_storage_class" {
   provisioner "local-exec" {
     command = <<-EOT
-    kubectl delete sc ${var.eks_default_storage_class} --kubeconfig <(echo $KUBECONFIG | base64 --decode)
+    kubectl delete sc ${var.eks_default_storage_class} --ignore-not-found=true --kubeconfig <(echo $KUBECONFIG | base64 --decode)
     EOT
 
     interpreter = ["/bin/bash", "-c"]

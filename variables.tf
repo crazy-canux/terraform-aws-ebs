@@ -61,3 +61,9 @@ variable "extra_set_values" {
   )
   default = []
 }
+
+variable "storage_class" {
+  type = string
+  description = "storage class name"
+  default = "ebs-default"
+}
