@@ -33,7 +33,7 @@ storageClasses:
       volumeBindingMode: WaitForFirstConsumer
       allowVolumeExpansion: true
       reclaimPolicy: Delete
-    - name: ebs-encrypted
+    - name: 
       parameters:
         type: gp3
         encrypted: "true"
