@@ -51,6 +51,7 @@ data "aws_region" "this" {}
 ##############################
 # Deploy CSI driver helm chart
 resource "helm_release" "ebs-csi" {
+  timeout    = 600
   name       = "ebs-csi"
   repository = var.csi_chart_repo_url
   chart      = "aws-ebs-csi-driver"
