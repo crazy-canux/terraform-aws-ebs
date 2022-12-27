@@ -77,10 +77,13 @@ resource "helm_release" "ebs-csi" {
     }
   }
 
-  # TODO: support multi storage class.
   set {
     name  = "storageClasses[0].name"
     value = var.storage_class
+  }
+  set {
+    name  = "storageClasses[1].name"
+    value = var.encrypted_storage_class
   }
 
   # Set ebs-csi service account name and IAM role annotaion
