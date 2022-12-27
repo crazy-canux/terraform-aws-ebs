@@ -67,3 +67,9 @@ variable "storage_class" {
   description = "storage class name"
   default = "ebs-default"
 }
+
+variable "encrypted_storage_class" {
+  type = string
+  description = "encrypted storage class name"
+  default = "ebs-encrypted"
+}
